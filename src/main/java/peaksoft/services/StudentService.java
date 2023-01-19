@@ -39,9 +39,9 @@ public interface StudentService {
 
     boolean checkByAge();
 
-    void addColumnGender(Gender gender);
+    String addColumnGender();
 
     Map<Gender, List<Student>> gruopByGender();
 
-    void deleteAllStudents(); //ddl
+    String deleteAllStudents(); //ddl
 }

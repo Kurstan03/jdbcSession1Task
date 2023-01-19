@@ -39,7 +39,7 @@ public interface StudentDao {
 
     boolean checkByAge();
 
-    void addColumnGender(Gender gender);
+    void addColumnGender();
 
     Map<Gender, List<Student>> gruopByGender();
 

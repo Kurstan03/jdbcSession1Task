@@ -169,42 +169,30 @@ public class StudentDaoImpl implements StudentDao{
 
     @Override
     public boolean checkByAge() {
-//        String query = "SELECT age > 18 FROM students";
-//        Statement statement = null;
-//        try {
-//            statement = connection.createStatement();
-//            ResultSet resultSet = statement.executeQuery(query);
-//
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return false;
-        String s = """
+        String query = """
                 SELECT * FROM students WHERE age > 18;
                 """;
         try (Statement statement =connection.createStatement()) {
-            ResultSet resultSet=statement.executeQuery(s);
-            boolean isTrue = false;
-            isTrue = resultSet.next();
+            ResultSet resultSet=statement.executeQuery(query);
+            boolean trueOrFalse = resultSet.next();
             resultSet.close();
-            return isTrue;
+            return trueOrFalse;
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
     }
 
     @Override
-    public void addColumnGender(Gender gender) {
-        String cre = "create type gender us enum ('FEMALE', 'MALE');";
+    public void addColumnGender() {
+        String cre = "create type gender as enum ('FEMALE', 'MALE');";
         Statement statement1 = null;
         try {
             statement1 = connection.createStatement();
-            statement1.executeQuery(cre);
+            statement1.execute(cre);
             statement1.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
 
         String sql= """
                 alter table students add column gender gender;
@@ -221,9 +209,9 @@ public class StudentDaoImpl implements StudentDao{
 
     @Override
     public Map<Gender, List<Student>> gruopByGender() {
-            Map<Gender,List<Student>> result=new HashMap<>();
-            List<Student>girls=new ArrayList<>();
-            List<Student>boys=new ArrayList<>();
+            Map<Gender,List<Student>> result = new HashMap<>();
+            List<Student>girls = new ArrayList<>();
+            List<Student>boys = new ArrayList<>();
 
 
             String sql= """

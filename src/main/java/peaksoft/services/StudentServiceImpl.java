@@ -60,8 +60,9 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public void addColumnGender(Gender gender) {
-        studentDao.addColumnGender(gender);
+    public String addColumnGender() {
+        studentDao.addColumnGender();
+        return "Column gender successfully added!!!";
     }
 
     @Override
@@ -71,7 +72,8 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public void deleteAllStudents() {
+    public String deleteAllStudents() {
         studentDao.deleteAllStudents();
+        return "All students successfully deleted!!!";
     }
 }
